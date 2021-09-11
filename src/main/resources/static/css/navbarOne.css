@@ -1,0 +1,152 @@
+.btn41-43 {
+  padding: 10px 25px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  outline: none !important;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.btn-41 {
+  border: 2px solid rgb(100,100,100);
+  z-index: 1;
+  color: black;
+}
+
+.btn-41:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: -1;
+  background: rgb(234,157,18);
+  transition: all 0.3s ease;
+}
+
+.btn-41:hover {
+  color: rgb(0, 0, 0);
+}
+
+.btn-41:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+.btn-41:active {
+  top: 2px;
+}
+.btn-4{
+margin-left:25px;
+}
+
+//navbar
+
+.NavbarbgC{
+background-color: #448a82;
+
+}
+.contactText{
+padding-left:65%;
+}
+.sidebar-container {
+  position: fixed;
+  width: 220px;
+  height: 100%;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: white;
+  color: #fff;
+}
+
+
+
+.sidebar-logo {
+  padding: 150px 15px 10px 30px;
+  font-size: 20px;
+  background-color: #2b5752;
+}
+
+.sidebar-navigation {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+}
+
+.sidebar-navigation li {
+  background-color: transparent;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: 20px;
+}
+
+.sidebar-navigation li a {
+  padding: 10px 15px 10px 30px;
+  display: block;
+  color: black;
+  text-decoration: none;
+  text-transform:uppercase;
+}
+
+.sidebar-navigation li .fa {
+  margin-right: 10px;
+}
+
+.sidebar-navigation li a:active,
+.sidebar-navigation li a:hover,
+.sidebar-navigation li a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.sidebar-navigation li::before {
+  background-color: #f5b645;
+  position: absolute;
+  content: '';
+  height: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 3px;
+  z-index: -1;
+}
+
+.sidebar-navigation li:hover::before {
+  width: 100%;
+}
+
+.sidebar-navigation .header {
+  font-size: 12px;
+  text-transform: uppercase;
+  background-color: #67b4ab;
+  padding: 10px 15px 10px 30px;
+}
+
+.sidebar-navigation .header::before {
+  background-color: transparent;
+}
+
+.content-container {
+  padding-left: 220px;
+}
+
+
+.navbar-fixed-main {
+  position: fixed; /* <-- Look here */
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+//addtocart
+

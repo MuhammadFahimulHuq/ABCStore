@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ABCStore-An online platform for personal care product.</title>
+
+    <!--    google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!--  boostrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- icon-->
+    <link rel="icon" href="../icons/abcIcon.png">
+    <!--    default css-->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+<!--    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/navbarOne.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+
+
+</head>
+<body>
+<!--<div th:include="fragments/navbar/navbar_main :: navbar_main ">...</div>-->
+
+<div th:include="fragments/navbar/Navbar :: navbar">...</div>
+<div class="container" style="padding:5% 0%;">
+    <div class="row">
+        <div class="col">
+            <img th:src="@{icons/loginImage.png}">
+        </div>
+        <div class="col">
+            <h2>Sign in</h2>
+            <form th:action="@{/login}" method="POST">
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email Address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                </div>
+                <div  class="form-text"><a href="#" style="color:#458985">Forgot password?</a> </div>
+               <div><small id="emailHelp" class="form-text validation-message" th:if="${param.error}" >Email or Password invalid, please verify!</small></div>
+                <button type="submit" class="btn btn-outline-success" style="margin:3px;">Submit</button>
+                <div  class="form-text">Don't have an account? <a href="/registration" style="color:#EF980C">Register</a></div>
+            </form>
+            <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+            <div class="form-group col-lg-12 mx-auto">
+                <a th:href="@{/oauth2/authorization/facebook}" class="btn btn-primary btn-block py-2 btn-facebook">
+                    <i class="fa fa-facebook-f mr-2"></i>
+                    <span class="font-weight-bold">Continue with Facebook</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<div th:include="fragments/footer/footer :: footer ">...</div>
+<script src="/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../jquery/navbar.js"></script>
+</body>
+</html>

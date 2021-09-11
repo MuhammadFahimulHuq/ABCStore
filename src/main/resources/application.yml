@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/abcstore
+    username: root
+    password: 12345
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 827452537943957
+            client-secret: 3c2961438b37889bcb50999f09da4073
+            scope:
+              - email
+              - public_profile

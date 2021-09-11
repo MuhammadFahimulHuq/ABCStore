@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div th:fragment="navbarCategory">
+    <div class="sidebar-container">
+        <div class="sidebar-logo">
+            ABC STORE
+        </div>
+        <ul class="sidebar-navigation">
+            <li class="header">Categories</li>
+            <li><a href="/">ALL PRODUCTS</a></li>
+            <li th:each="categoryList : ${categoryList}">
+                <a  th:href=@{'/category/'+${categoryList.id}} th:text="${categoryList.categoryName}"></a>
+            </li>
+            <span th:switch="${cartSize}">
+                <span th:case="'0'">
+                <li class="header" ><a href="/cart" style="text-decoration:none">Your Cart<img src="../icons/addToCartImage.png" style="width:27px; margin-left:5px;margin-bottom:10px;"></a> </li>
+                </span>
+                <span th:case="*">
+                      <li class="header" style="display:flex" >
+               <a href="/cart" th:text="'Item : '+${cartSize}"></a><img src="../icons/addToCartImage.png" style="width:27px; margin-left:5px;margin-bottom:10px;"></li>
+                </span>
+            </span>
+
+
+<!--            <div class="card text-white bg-secondary mb-3" th:each="cartProduct : ${cartProducts}" style="max-width: 18rem;">-->
+<!--                <div class="card-header" th:text="${cartProduct.product.productSpec.brand}+': '+${cartProduct.product.productName}" ></div>-->
+<!--                <a  th:href="@{'/cart/delete/'+${cartProduct.id}}">Delete</a>-->
+<!--                <div class="card-body">-->
+<!--                    <div style="display:flex">-->
+<!--                        <img style="width:50px" th:src="@{'data:image/jpeg;base64,'+${cartProduct.product.generateFrontImage()}}" alt="No picture found!">-->
+
+<!--                        <span th:switch="${cartProduct.product.productPrice.discountPrice}">-->
+<!--                            <span th:case="'0.0'">-->
+<!--                                <div  style="display:flex; margin-left:40px;">-->
+<!--                                     <img class="tkIcon" th:src="@{icons/tkIcon.png}"  ><p class="card-text " th:text="${cartProduct.product.productPrice.price}"></p>-->
+<!--                                     </div>-->
+<!--                        </span>-->
+<!--                        <span th:case="*">-->
+<!--                            <div style="display:flex">-->
+<!--                                <div  style="display:flex"><img class="tkIcon" th:src="@{icons/tkIcon.png}"  ><p class="card-text priceText" th:text="${cartProduct.product.productPrice.price}"></p></div>-->
+<!--                                            <div  style="display:flex; margin-left:15px;"><img   class="tkIcon" th:src="@{icons/tkIcon.png}"  > <p class="card-text "  th:text="${cartProduct.product.productPrice.discountPrice}"></p></div>-->
+<!--                                </div>-->
+<!--                        </span>-->
+<!--                    </span>-->
+<!--                    </div>-->
+
+<!--                    <form>-->
+<!--                        <label for="quantity">Quantity:</label>-->
+<!--                        <input type="number" id="quantity" th:value="${cartProduct.quantity}">-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--                <div class="card-footer">Total:</div>-->
+<!--            </div>-->
+
+
+        </ul>
+    </div>
+
+
+</div>
+</body>
+</html>

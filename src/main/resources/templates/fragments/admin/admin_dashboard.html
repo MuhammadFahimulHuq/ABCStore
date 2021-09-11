@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+<div th:fragment="adminDashboard">
+    <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="admin" >
+
+
+
+        <ul class="nav justify-content-center">
+            <strong class="navbar-brand">Admin Dashboard</strong>
+            <li class="nav-item" style="margin:2px">
+                <a class="btn btn-outline-warning btn-sm" href="/category" type="button">Category</a>
+            </li>
+            <li class="nav-item" style="margin:2px">
+                <a class="btn btn-outline-warning btn-sm"  href="/product" type="button">Product</a>
+            </li>
+            <li class="nav-item" style="margin:2px">
+                <a class="btn btn-outline-warning btn-sm" href="/paymentmethod" type="button">Payment Method</a>
+            </li>
+
+        </ul>
+        </div>
+
+
+</div>
+</div>
+</body>
+</html>

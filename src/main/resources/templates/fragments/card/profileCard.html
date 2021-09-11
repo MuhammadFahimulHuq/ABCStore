@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="profileCard">
+    <div class="container">
+        <div class="main-body">
+
+            <!-- Breadcrumb -->
+
+            <!-- /Breadcrumb -->
+
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="../icons/abcIcon.png" alt="Admin" class="rounded-circle" width="150">
+                                <div class="mt-3">
+                                    <h4 th:text="${user.userName}"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary"
+                                     th:text="${user.firstName}+' '+${user.lastName}">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" >Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary" th:text="${user.email}">
+
+                                </div>
+                            </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row gutters-sm">
+                        <div class="col-sm-12 mb-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="d-flex align-items-center mb-3">Order Receipt</h5>
+
+
+
+                                    <div class="table-responsive">
+                                        <table class="table align-middle">
+                                            <thead>
+                                         <th scope="col">OrderID</th>
+                                         <th scope="col">Product</th>
+                                         <th scope="col">Date</th>
+                                         <th scope="col">Contact Number</th>
+                                         <th scope="col">Address</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="p:${purchaseReceipt}">
+                                            <td th:text="${p.id}+''+${p.paymentMethod.id}"></td>
+                                            <td >
+                                                <ul style=" list-style:none;" th:each="o:${p.orderItems}">
+                                                    <li th:text="${o.product.productName}+' - quantity: '+${o.quantity}">
+
+                                                    </li>
+                                                </ul>
+
+                                            </td>
+                                                <td th:text="${p.purchaseDate}"></td>
+                                                <td th:text="${p.contactNumber}"></td>
+                                                <td>
+                                                    <p th:text="${p.address.city}+' Block:'+${p.address.block}+' Road:'+${p.address.road}+' House:'+${p.address.house}+' Area:'+${p.address.area}"></p>
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ABCStore-An online platform for personal care product.</title>
+    <!--    google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!--  boostrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- icon-->
+    <link rel="icon" href="../icons/abcIcon.png">
+    <!--    default css-->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+<!--    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>-->
+</head>
+<body>
+<!--<div th:include="fragments/navbar/navbar_main :: navbar_main ">...</div>-->
+
+<div th:include="fragments/navbar/Navbar :: navbar">...</div>
+<div>
+    <form th:action="@{'/update/'+${category.id}}" th:object="${category}" method="POST">
+        <h3>Edit Category</h3>
+        <input type="text" placeholder="Category Name" th:field="*{categoryName}">
+        <label  th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}"
+                class="validation-message"></label>
+        <button type="submit">Update Category</button>
+    </form>
+
+</div>
+
+<script src="/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../jquery/navbar.js"></script>
+</body>
+</html>

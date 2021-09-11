@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ABCStore-An online platform for personal care product.</title>
+
+
+    <!--    google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!--  boostrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- icon-->
+    <link rel="icon" href="../icons/abcIcon.png">
+    <!--    default css-->
+<!--    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+</head>
+<body>
+<!--<div th:include="fragments/navbar/navbar_main :: navbar_main ">...</div>-->
+<div th:include="fragments/navbar/Navbar :: navbar">...</div>
+
+<div class="container" style="text-align:center; padding:5% 0%;">
+    <div th:include="fragments/admin/admin_dashboard :: adminDashboard ">...</div>
+    <h3>Product Section</h3>
+    <form enctype="multipart/form-data" th:action="@{'/productupdate/'+${id}}" th:object="${product}" method="POST">
+        <div class="row form-group" style="padding: 3% 0%;">
+            <div class="col">
+                <p th:if="${#lists.isEmpty(category)}">
+                    Please create category first
+                </p>
+                <div th:object="${product.category}">
+                    <label for="category">Choose a category:</label>
+
+                    <select name="category" id="category" th:field="*{id}">
+                        <option th:each="category : ${category}" th:text="${category.categoryName}"  th:value="${category.id}"></option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col" style="display:flex;">
+                <div th:object="${product.productSpec}">
+                    <input class="form-control" type="text" placeholder="Brand" th:field="*{brand}" style="margin:3px;">
+
+                    <div th:object="${product}">
+                        <input class="form-control" type="text" placeholder="Product Name" th:field="*{productName}" style="margin:3px;">
+                        <label  th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></label>
+                    </div>
+
+                    <input class="form-control" type="text" placeholder="Weight"  th:field="*{weight}" style="margin:3px;">
+                    <label for="gender">Gender</label>
+                    <select id="gender" th:field="*{gender}" style="margin:3px;">
+                        <option th:value="Male">Male</option>
+                        <option th:value="Female">Female</option>
+                        <option th:value="Unisex">Unisex</option>
+                        <input  class="form-control" style="margin:3px;" type="text" placeholder="Made In From" th:field="*{madeIn}">
+                        <textarea class="form-control" style="margin:3px;" rows="3"  placeholder="Description" th:field="*{description}"></textarea>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="col">
+
+                <div th:object="${product.productPrice}">
+                    <label>Price</label>
+                    <input class="form-control" type="number" min="1" step="any" placeholder="Price" th:field="*{price}">
+                    <label  th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                            class="validation-message"></label>
+
+                    <label>Discount Price</label>
+                    <input class="form-control" type="number" placeholder="DiscountPrice" th:field="*{discountPrice}">
+                    <label  th:if="${#fields.hasErrors('discountPrice')}" th:errors="*{discountPrice}"
+                            class="validation-message"></label>
+
+                </div>
+
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label>Upload Front Image</label>
+                    <input type="file" class="form-control-file" name="imageFront">
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Back Image</label>
+                    <input type="file" class="form-control-file" name="imageBack">
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <button class="btn btn-success mb-2" style="margin: 10px 0px;" type="submit">Create Product</button>
+    </form>
+
+
+</div>
+
+<table  class="table table-bordered" style="width:100%;">
+    <thead>
+    <tr>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Product Category ID</th>
+        <th scope="col">Product Category</th>
+        <th scope="col">Product ID</th>
+        <th scope="col">Product Brand</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Product Weight</th>
+        <th scope="col">Product Price</th>
+        <th scope="col">Product Discount-Price</th>
+        <th scope="col">Product Discount-Percentage</th>
+        <th scope="col">Product Gender</th>
+        <th scope="col">Product Description</th>
+        <th scope="col">Product MadeInFrom</th>
+        <th scope="col">Product Front-Image</th>
+        <th scope="col">Product Back-Image</th>
+        <th scope="col">Create Supply</th>
+    </tr>
+    </thead>
+    <tr th:if="${#lists.isEmpty(products)}">
+        <td>
+            No Records found. Add some...!
+        </td>
+        <tbody>
+        <tr  th:each="product : ${products}">
+            <td style=" text-align: center; "><a th:href="@{'/update/product/'+${product.id}}" >Update Product</a></td>
+            <td style=" text-align: center; "><a href="#" th:href="@{'/delete/product/'+${product.id}}">Delete Product</a></td>
+            <td style=" text-align: center; " th:text="${product.category.id}"></td>
+            <td style=" text-align: center; " th:text="${product.category.categoryName}"></td>
+            <td style=" text-align: center; " th:text="${product.id}"></td>
+            <td style=" text-align: center; " th:text="${product.productSpec.brand}"></td>
+            <td style=" text-align: center; " th:text="${product.productName}"></td>
+            <td style=" text-align: center; " th:text="${product.productSpec.weight}"></td>
+            <td style=" text-align: center; " th:text="${product.productPrice.price}"></td>
+            <td style=" text-align: center; " th:text="${product.productPrice.discountPrice}"></td>
+            <td style=" text-align: center; " th:text="${product.productPrice.discountPercentage}+' %'"></td>
+            <td style=" text-align: center; " th:text="${product.productSpec.gender}"></td>
+            <td style=" text-align: center; " th:text="${product.productSpec.description}"></td>
+            <td style=" text-align: center; " th:text="${product.productSpec.madeIn}">
+            </td><td style=" text-align: center; " ><img style="width:30px" th:src="@{'data:image/jpeg;base64,'+${product.generateFrontImage()}}" alt="No picture found!"></td>
+            <td style=" text-align: center; " ><img style="width:30px" th:src="@{'data:image/jpeg;base64,'+${product.generateBackImage()}}" alt="No picture found!"></td>
+            <td style=" text-align: center; "><a th:href="@{'/stock/'+${product.id}}" >+</a></td>
+        </tr>
+        </tbody>
+</table>
+</div>
+<script src="/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../jquery/navbar.js"></script>
+</body>
+</html>

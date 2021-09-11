@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ABCStore-An online platform for personal care product.</title>
+    <link rel="icon" href="../icons/abcIcon.png">
+    <!--    google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!--  boostrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- icon-->
+    <link rel="icon" href="../icons/abcIcon.png">
+    <!--    default css-->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+<!--    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+</head>
+<body>
+<div >
+<!--    <div th:include="fragments/navbar/navbar_main :: navbar_main ">...</div>-->
+    <div th:include="fragments/navbar/Navbar :: navbar">...</div>
+
+<div class="container" style="padding:5% 0%">
+    <div th:include="fragments/admin/admin_dashboard :: adminDashboard ">...</div>
+    <h4 th:text="'Create Stock : '+${product.productSpec.brand}+':'+${product.productName}"> </h4>
+    <form th:action="@{'/stock/'+${id}}" th:object="${products}" method="POST">
+        <div th:object="${stock}">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="start">Shipment Date:</label>
+                            <input type="date"  class="form-control"   id="start" name="shipmentDate"
+                                   th:value="${shipmentDate}"    th:field="*{shipmentDate}">
+
+                            <label>Total Unit</label>
+                            <input class="form-control"  type="number" min="1" step="any" th:field="*{totalUnit}">
+                            <label  th:if="${#fields.hasErrors('totalUnit')}" th:errors="*{totalUnit}"
+                                    class="validation-message"></label>
+
+                            <label>Total Unit Price</label>
+                            <input class="form-control "  type="number" min="1" step="any"  th:field="*{totalUnitPrice}">
+                            <label  th:if="${#fields.hasErrors('totalUnitPrice')}" th:errors="*{totalUnitPrice}"
+                                    class="validation-message"></label>
+                            <button class="btn btn-success mb-2" style="margin-top:10px" type="submit">Create Stock</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+    </form>
+
+
+
+        <table class="table" style="width:100%; padding:6px">
+            <thead class="thead-dark">
+            <tr>
+                <th>Update</th>
+                <th>Delete</th>
+                <th>ID</th>
+                <th>Shipment-Date</th>
+                <th>Total-Unit</th>
+                <th>Total-Unit-Price</th>
+                <th>Remaining-Unit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(stockList)}">
+                <td>
+                    No Records Found. Add Some...!
+                </td>
+
+
+
+            </tr>
+            <tr th:each="stock:${stockList}">
+                <td style=" text-align: center; " ><a th:href="@{'/product/stock/update/'+${stock.id}}">update</a></td>
+                <td style=" text-align: center; " ><a th:href="@{'/product/stock/delete/'+${stock.id}}">delete</a></td>
+                <td style=" text-align: center; " th:text="${stock.id}"></td>
+                <td style=" text-align: center; " th:text="${stock.shipmentDate}"></td>
+                <td style=" text-align: center; "  th:text="${stock.totalUnit}"></td>
+                <td style=" text-align: center; " th:text="${stock.totalUnitPrice}"></td>
+                <td style=" text-align: center; " th:text="${stock.remainingUnit}"></td>
+            </tr>
+            </tbody>
+        </table>
+</div>
+</div>
+</div>
+
+</div>
+<div th:include="fragments/footer/footer :: footer ">...</div>
+<script src="/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../jquery/navbar.js"></script>
+</body>
+</html>

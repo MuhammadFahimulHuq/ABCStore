@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="_csrf_parameter" th:content="${_csrf.parameterName}"/>
+    <title>ABCStore-An online platform for personal care product.</title>
+    <!--    google font-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!--  boostrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- icon-->
+    <link rel="icon" href="../icons/abcIcon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--    default css-->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+<!--    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/navbarOne.css}"/>
+    <link rel="stylesheet" th:href="@{/css/cartCard.css}"/>
+    <link rel="stylesheet" th:href="@{/css/card.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+
+
+</head>
+<body>
+
+<!--<div th:include="fragments/navbar/navbar_main :: navbar_main ">...</div>-->
+<div th:include="fragments/navbar/Navbar :: navbar">...</div>
+<!--<div th:include="fragments/navbar/navbar_category :: navbarCategory"></div>-->
+<div class="container-fluid" style="padding-top: 5%; padding-bottom:5%;">
+    <div class="container">
+        <div th:include="fragments/card/cartItem :: cartItem">...</div>
+    </div>
+</div>
+<div th:include="fragments/footer/footer :: footer ">...</div>
+
+
+
+
+<script src="/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../jquery/cart.js"></script>
+<script type="text/javascript" src="../jquery/navbar.js"></script>
+</body>
+</html>

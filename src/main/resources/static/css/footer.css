@@ -1,0 +1,26 @@
+
+
+
+.fi {
+  color: white;
+}
+
+.form-control::placeholder {
+  font-size: 0.95rem;
+  color: white;
+  font-style: italic;
+}
+
+.form-control.shadow-0:focus {
+  box-shadow: none;
+}
+
+.bg-white{
+background: rgb(111,168,129);
+background: linear-gradient(0deg, rgba(111,168,129,1) 0%, rgba(69,135,128,1) 100%);
+color:white;
+}
+.link{
+color:#d4d4d4;
+text-decoration:none;
+}

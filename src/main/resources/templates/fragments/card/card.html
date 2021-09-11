@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<div th:fragment="card">
+    <div class="productCard">
+
+
+   <span th:if="${#lists.isEmpty(products)}">
+
+       <img  src="../icons/unavailableImage.png"  style="width:50%;margin-left:50% margin-top:25%; margin-bottom:25%">
+
+           </span>
+
+
+
+
+                       <div  class="row " style="margin-bottom: 30px;" th:each="product: ${products}"  >
+                  <div  class="col-sm-12 col-lg-6"  >
+
+                    <div class="card h-100 cardBox " style="width: 12rem; margin-right:42px">
+
+                        <a th:href="'/view/'+${product.id}">
+                        <img  class="card-img-top" th:src="@{'data:image/jpeg;base64,'+${product.generateFrontImage()}}" alt="...">  </a>
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${product.productSpec.brand}+': '+${product.productName}"></h5>
+
+
+                                    <span th:switch="${product.productPrice.discountPrice}">
+                                        <span th:case="'0.0'">
+                                              <div  style="display:flex; margin-left:40px;">
+                               <img class="tkIcon" src="../icons/tkIcon.png"  ><p class="card-text " th:text="${product.productPrice.price}"></p>
+                                </div>
+
+                                        </span>
+                                        <span th:case="*">
+                                             <div style="display:flex">
+                                              <div  style="display:flex"><img class="tkIcon" src="../icons/tkIcon.png"  ><p class="card-text priceText" th:text="${product.productPrice.price}"></p></div>
+                                            <div  style="display:flex; margin-left:15px;"><img   class="tkIcon" src="../icons/tkIcon.png"  > <p class="card-text "  th:text="${product.productPrice.discountPrice}"></p></div>
+                                        </div>
+                                        </span>
+                                    </span>
+                            <div style="margin-left:30px;">
+
+                            <span class="fa fa-star checkedStar"></span>
+                            <span class="fa fa-star checkedStar"></span>
+                            <span class="fa fa-star checkedStar"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+
+                            </div>
+                            <p style="font-size:15px; font-weight: bold; margin-left:18px;" th:text="'Weight : ' + ${product.productSpec.weight}"></p>
+                            <a style="margin-left:15px;" type="button" th:href="@{'/cart/'+${product.id}}" class="btn btn-success">Add To Cart</a>
+
+                        </div>
+                    </div>
+                </div>
+                         </div>
+
+
+
+
+            </div>
+
+
+
+
+</div>
+</div>
+</body>
+</html>

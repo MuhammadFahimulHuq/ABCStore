@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<div th:fragment="productCard">
+    <div class="card mb-3" style="max-width: 100%;">
+        <div class="row g-0" style="margin:10px;">
+<!--            <div class="col-md-1" style="margin:15px;">-->
+<!--                <img-->
+<!--                        th:src="@{'data:image/jpeg;base64,'+${product.generateBackImage()}}"-->
+<!--                        class="img-fluid" />-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <img-->
+<!--                        th:src="@{'data:image/jpeg;base64,'+${product.generateFrontImage()}}"-->
+<!--                        class="img-fluid"-->
+<!--                />-->
+<!--            </div>-->
+            <div class="col-md-5" style="margin:10px;" >
+            <div id="content-wrapper">
+
+                <div class="column">
+                    <div id="img-container">
+                        <div id="lens"></div>
+                        <img id=featured th:src="@{'data:image/jpeg;base64,'+${product.generateFrontImage()}}">
+                    </div>
+                    <div id="slide-wrapper" >
+                        <img id="slideLeft" class="arrow" src="../icons/arrow-left.png">
+
+                        <div id="slider">
+                            <img class="thumbnail active" th:src="@{'data:image/jpeg;base64,'+${product.generateFrontImage()}}">
+                            <img class="thumbnail" th:src="@{'data:image/jpeg;base64,'+${product.generateBackImage()}}">
+
+
+                        </div>
+
+                        <img id="slideRight" class="arrow" src="../icons/arrow-right.png">
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body" style="display:flex; flex-direction:column;  ">
+
+                        <span th:if="${#lists.isEmpty(InStock)}">
+                            <strong style="color:red">Out Of Stock</strong>
+                        </span>
+                        <span th:if="${not #lists.isEmpty(InStock)}">
+                              <strong style="color:green">In Stock</strong>
+                        </span>
+
+
+                    <h4 class="card-title" style="font-weight:bold;" th:text="${product.productSpec.brand}+' : '+${product.productName}"></h4>
+                    <p style="font-weight:bold;" th:text="'Weight : '+${product.productSpec.weight}"></p>
+                    <p style="font-weight:bold;" th:text="'Made In From : '+${product.productSpec.madeIn}"></p>
+                    <p style="font-weight:bold;" th:text="'Gender : '+${product.productSpec.gender}"></p>
+                    <p style="font-weight:bold;" th:text="'Weight : '+${product.productSpec.weight}"></p>
+                    <p class="card-text" style="color:#808080;margin-top:40px;" th:text="${product.productSpec.description}"></p>
+                    <span th:switch="${product.productPrice.discountPrice}" style="margin-top:25px;">
+                                        <span th:case="'0.0'">
+                                              <div  style="display:flex; margin-left:40px;">
+                               <img class="tkIcon" src="../icons/tkIcon.png"  ><h3 class="card-text " style="color:green;" th:text="${product.productPrice.price}"></h3>
+                                </div>
+
+                                        </span>
+                                        <span th:case="*">
+                                             <div style="display:flex">
+                                              <div  style="display:flex"><img class="tkIcon" src="../icons/tkIcon.png"  ><h3 class="card-text priceText" style="color:#ff6363;" th:text="${product.productPrice.price}"></h3></div>
+                                            <div  style="display:flex; margin-left:15px;"><img   class="tkIcon" src="../icons/tkIcon.png"  > <h3 class="card-text " style="color:green;" th:text="${product.productPrice.discountPrice}"></h3></div>
+                                        </div>
+                                        </span>
+                                    </span>
+
+                    <script type="text/javascript" th:inline="javascript">
+                var productID="[[${product.id}]]";
+            </script>
+
+                    <div>
+                        <nav>
+                            <label style="margin-top:25px;">Quantity : </label>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link minusButton" href="" th:id="${product.id}">-</a>
+                                </li>
+                                <li class="page-item">
+                                    <input type="text" th:value="1" class="form-control text-center"
+                                           onkeydown="return false;" th:id="'quantity'+${product.id}" style="max-width:50px"/>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link plusButton" href="" th:id="${product.id}">+</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <button class="btn btn-dark" id="addTocart" style="margin-top:25px;">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"  xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ABCStore-An online platform for personal care product.</title>
+    <!--    google font-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!--  boostrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- icon-->
+    <link rel="icon" href="../icons/abcIcon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--    default css-->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <!--    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/navbarOne.css}"/>
+    <link rel="stylesheet" th:href="@{/css/profileCard.css}"/>
+<!--    <link rel="stylesheet" th:href="@{/css/card.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+</head>
+<body>
+<div th:include="fragments/navbar/Navbar :: navbar"></div>
+<div style="padding:5% 0%">
+    <div th:include="fragments/card/profileCard :: profileCard">...</div>
+</div>
+
+
+<div th:include="fragments/footer/footer :: footer ">...</div>
+<script src="/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../jquery/navbar.js"></script>
+</body>
+</html>

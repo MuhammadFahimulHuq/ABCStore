@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+    <div th:fragment="cartItem">
+<span th:switch="${cartSize}">
+    <span th:case="'0'">
+
+        <div class="row justify-content-center">
+            <div class="col-4">
+                   <div class="animated shake"><img style="width:150px" th:src="@{icons/emptyBoxImage.png}"></div>
+             <h3 class="animated pulse" style="margin:10px" >Your Cart is Empty!</h3>
+                <a type="button" class="btn btn-success btn-lg btn-block" href="/">Continue Browsing...</a>
+            </div>
+
+        </div>
+
+
+
+
+    </span>
+    <span th:case="*">
+    <section class="shopping-cart dark">
+        <div class="container">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="items">
+                            <div class="product"  th:each="cart :${cartList}">
+                                <div class="row">
+
+                                    <a th:href="@{'/cart/delete/'+${cart.id}}" style="text-decoration:none;color:black; :hover:red;" >
+                                        <i class="far fa-trash-alt"></i>
+                                        <!--                                                                <div class="close-container">-->
+                                        <!--                                                                    <div class="leftright"></div>-->
+                                        <!--                                                                    <div class="rightleft"></div>-->
+                                        <!--                                                                    <label class="close labelR">Remove</label>-->
+                                        <!--                                                                </div>-->
+                                    </a>
+
+                                    <div class="col-md-2">
+                                        <img class="img-fluid mx-auto d-block image" th:src="@{'data:image/jpeg;base64,'+${cart.product.generateFrontImage()}}"></div>
+                                    <div class="col-md-10">
+                                        <div class="info">
+                                            <div class="row">
+                                                <div class="col-md-3 product-name">
+                                                    <div class="product-name">
+                                                        <a class="product-link-name" th:href="'/view/'+${cart.product.id}" th:text="${cart.product.productSpec.brand}+' : '+${cart.product.productName}"></a>
+                                                        <div class="product-info">
+                                                            <div>Weight: <span class="value" th:text="${cart.product.productSpec.weight}"></span></div>
+                                                            <div>Description: <span class="value" th:text="${cart.product.productSpec.description}"></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 quantity">
+                                                    <div>
+                                                        <nav>
+                                                            <ul class="pagination">
+                                                                <li class="page-item">
+                                                                    <a class="page-link minusButton" href="" th:id="${cart.product.id}">-</a>
+                                                                </li>
+                                                                <li class="page-item">
+                                                                    <input type="text" th:value="${cart.quantity}" class="form-control text-center"
+                                                                           onkeydown="return false;" th:id="'quantity'+${cart.product.id}"/>
+                                                                </li>
+
+                                                                <li class="page-item">
+                                                                    <a class="page-link plusButton" href="" th:id="${cart.product.id}">+</a>
+                                                                </li>
+                                                            </ul>
+                                                        </nav>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-2 price" >
+                                                            <span th:switch="${cart.product.productPrice.discountPrice}">
+                                                                <span th:case="'0.0'">
+                                                                    <div  style="display:flex; margin-left:40px;">
+                                                                        <img class="tkIcon" src="../icons/tkIcon.png"  ><p class="card-text " th:text="${cart.product.productPrice.price}"></p>
+                                                                    </div>
+                                                                     <div style="display:flex"><p th:text="${cart.quantity}+'X'+${cart.product.productPrice.price}+'='"></p><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
+                                                                </span>
+                                                                <span th:case="*">
+                                                                    <div style="display:flex">
+                                                                        <div  style="display:flex"><img class="tkIcon" src="../icons/tkIcon.png"  ><p class="card-text priceText" id="priceNum" th:text="${cart.product.productPrice.price}"></p></div>
+                                                                        <div  style="display:flex; margin-left:15px;"><img   class="tkIcon" src="../icons/tkIcon.png"  > <p class="card-text dPriceText" id="discountPriceNum"  th:text="${cart.product.productPrice.discountPrice}"></p></div>
+                                                                    </div>
+                                                                        <div style="display:flex"><p th:text="${cart.quantity}+'X'+${cart.product.productPrice.discountPrice}+'='"></p><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
+                                                                </span>
+                                                            </span>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-12 col-lg-4">
+                        <div class="summary">
+                            <h3>Summary</h3>
+                            <div class="summary-item" th:each="cart :${cartList}"> <span class="text" th:text="${cart.product.productName}"></span>
+                            <span class="price" id="subTotalAmount">
+                                           <span th:switch="${cart.product.productPrice.discountPrice}">
+                                               <span th:case="'0.0'">
+                                                   <div style="display:flex"><p th:text="${cart.quantity}+'X'+${cart.product.productPrice.price}+'='"></p><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
+                                               </span>
+                                               <span th:case="*">
+                                                   <div style="display:flex"><p th:text="${cart.quantity}+'X'+${cart.product.productPrice.discountPrice}+'='"></p><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
+                                               </span>
+                                           </span>
+
+
+                            </span></div>
+
+                            <div class="summary-item"><span class="text" >Total</span><span class="price" id="totalAmount"> </span></div>
+                            <a th:href="@{'/purchasereceipt/'+${userId}}" type="button" class="btn btn-success btn-lg btn-block">Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    </span>
+
+</span>
+
+<!--      <div class="card cartItemCard"  th:each="cart :${cartList}" style="margin-top:5px;margin-bottom:5px;">-->
+<!--          <div class="row">-->
+<!--                  <div class="col">-->
+<!--                      <img  class="d-block w-100" style="10%" th:src="@{'data:image/jpeg;base64,'+${cart.product.generateFrontImage()}}" alt="No picture found!">-->
+<!--                  </div>-->
+
+<!--                  <div class="col-7">-->
+<!--                      <a href="#" style="text-decoration:none; font-size:20px" th:text="${cart.product.productSpec.brand}+' : '+${cart.product.productName}">  </a>-->
+<!--                      <p style="font-size:15px; font-weight: bold;" th:text="'Weight : ' + ${cart.product.productSpec.weight}"></p>-->
+<!--                      <p style="font-size:15px" th:text=" ${cart.product.productSpec.description}"></p>-->
+<!--                  </div>-->
+<!--                  <div class="col" style="padding-top:10px;">-->
+<!--                      <h4 style="font-weight: bold;" id="head" >Price</h4>-->
+<!--                      <span th:switch="${cart.product.productPrice.discountPrice}">-->
+<!--                      <span th:case="'0.0'">-->
+<!--                          <div  style="display:flex; margin-left:40px;">-->
+<!--                              <img class="tkIcon" src="../icons/tkIcon.png"  ><p class="card-text " th:text="${cart.product.productPrice.price}"></p>-->
+<!--                          </div>-->
+<!--                      </span>-->
+<!--                      <span th:case="*">-->
+<!--                          <div style="display:flex">-->
+<!--                              <div  style="display:flex"><img class="tkIcon" src="../icons/tkIcon.png"  ><p class="card-text priceText" id="priceNum" th:text="${cart.product.productPrice.price}"></p></div>-->
+<!--                              <div  style="display:flex; margin-left:15px;"><img   class="tkIcon" src="../icons/tkIcon.png"  > <p class="card-text dPriceText" id="discountPriceNum"  th:text="${cart.product.productPrice.discountPrice}"></p></div>-->
+<!--                          </div>-->
+<!--                      </span>-->
+<!--                  </span>-->
+<!--                  </div>-->
+<!--                  <div class="col" style="padding-top:10px;">-->
+<!--                      <form id="quantityForm">-->
+<!--                          <label  style="font-weight: bold;" >Quantity : </label>-->
+<!--                          <input type="number"  th:id="'quantity'+${cart.id}" min="1" th:value="${cart.quantity}" style="width:40%;">-->
+<!--                      </form>-->
+<!--                  </div>-->
+<!--                  <div class="col" >-->
+<!--                      <a th:href="@{'/cart/delete/'+${cart.id}}" >-->
+<!--                          <div class="close-container">-->
+<!--                              <div class="leftright"></div>-->
+<!--                              <div class="rightleft"></div>-->
+<!--                              <label class="close labelR">Remove</label>-->
+<!--                          </div>-->
+<!--                      </a>-->
+<!--                  </div>-->
+
+<!--              </div>-->
+
+<!--                  <div class="card">-->
+<!--                      <div class="card-body">-->
+<!--                          <h4>Sub total: 5000</h4>-->
+<!--                          <h4>Total: 5000</h4>-->
+<!--                      </div>-->
+<!--                  </div>-->
+
+
+
+<!--          </div>-->
+<!--      </div>-->
+
+
+
+    </div>
+
+</body>
+</html>
