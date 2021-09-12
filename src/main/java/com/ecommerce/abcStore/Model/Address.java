@@ -38,7 +38,6 @@ public class Address {
     private String area;
 
     //RelationTable
-    @OneToOne
-    private PurchaseReceipt purchaseReceipt;
+
 
 }

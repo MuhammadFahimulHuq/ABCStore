@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ABCStore-An online platform for personal care product.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!--  boostrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- icon-->
+
+    <link rel="icon" href="../icons/abcIcon.png">
+    <!--    default css-->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <!--    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+</head>
+</head>
+<body>
+<div th:include="fragments/navbar/Navbar :: navbar">...</div>
+<div th:include="fragments/admin/admin_dashboard :: adminDashboard ">...</div>
+<div class="container" style="padding:5% 0%; ">
+    <h5>Orders Record</h5>
+
+<table  class="table table-bordered" style="width:100%;background-color:white;">
+    <thead>
+    <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Product List</th>
+        <th scope="col">Total Amount</th>
+        <th scope="col">Order Address</th>
+        <th scope="col">User Info</th>
+        <th scope="col">Delivered</th>
+
+    </tr>
+    </thead>
+    <tr th:if="${#lists.isEmpty(orders)}">
+        <td>
+            No Records found!
+        </td>
+        <tbody>
+        <tr  th:each="order : ${orders}">
+            <td style=" text-align: center; " th:text="${order.id}+''+${order.paymentMethod.id}"></a></td>
+              <td>
+                <ul style=" list-style:none;" th:each="o:${order.orderItems}">
+                    <li th:text="${o.product.productName}+' - quantity: '+${o.quantity}+' - weight: '+${o.product.productSpec.weight} ">
+                    </li>
+                </ul>
+            </td>
+            <td style=" text-align: center; " th:text="${order.total}"></td>
+            <td style=" text-align: center; " th:text="${order.address}"></td>
+            <td style=" text-align: center; " >
+                <ul style="list-style:none;">
+                    <li th:text="${order.user.firstName}+' '+${order.user.lastName}">
+                    </li>
+                    <li th:text="${order.contactNumber}">
+
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <button class="btn btn-success" id="delivery">Yes</button>
+                <span id="DeliveredMessage">Yes</span>
+            </td>
+
+
+
+
+        </tr>
+        </tbody>
+</table>
+</div>
+
+<div th:include="fragments/footer/footer :: footer ">...</div>
+<script src="/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../jquery/navbar.js"></script>
+</body>
+</html>

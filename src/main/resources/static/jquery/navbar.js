@@ -1,3 +1,7 @@
+$(document).ready(function(){
+$("#DeliveredMessage").hide()
+})
+
 $(function() {
     $('body').addClass('js');
 
@@ -12,3 +16,7 @@ $(function() {
       return false;
     })
 });
+$("#delivery").on("click",function(){
+$("#delivery").hide();
+$("#DeliveredMessage").show()
+})

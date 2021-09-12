@@ -75,13 +75,10 @@ public class ProductController {
     public ModelAndView createProduct(@Valid Product product, BindingResult bindingResult,@RequestParam("imageFront") MultipartFile imageFront,@RequestParam("imageBack") MultipartFile imageBack) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         Product existProduct = productService.getProductByProductName(product.getProductName());
-
-
         if(existProduct !=null){
             bindingResult
                     .rejectValue("productName","error.product",
                             "Already Product Exist");
-
         }
         else if(bindingResult.hasErrors()){
             modelAndView.setViewName("product");
@@ -107,8 +104,8 @@ public class ProductController {
             categoryService.createCategory(category);
             modelAndView.addObject("successMessage","New Product Created");
             modelAndView.addObject("product",new Product());
-            modelAndView.setViewName("redirect:/product");
-        }
+
+
         try {
             productService.saveImage(imageFront);
             productService.saveImage(imageBack);
@@ -117,8 +114,8 @@ public class ProductController {
             e.printStackTrace();
 
         }
-
-
+        modelAndView.setViewName("redirect:/product");
+        }
         return modelAndView;
     }
     @RequestMapping(value ="/productupdate/{id}",method = RequestMethod.GET)

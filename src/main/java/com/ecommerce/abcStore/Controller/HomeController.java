@@ -35,10 +35,11 @@ public class HomeController {
     private AuthenticationFacade authenticationFacade;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView Home(Authentication authentication){
+    public ModelAndView Home(Authentication authentication,Principal principal){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("products",productService.getAllProduct());
         modelAndView.addObject("categoryList",categoryService.getAllCategory());
+
         if(authentication == null || authentication instanceof AnonymousAuthenticationToken){
             modelAndView.addObject("cartSize",0);
         }

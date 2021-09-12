@@ -63,6 +63,7 @@ public class UserService{
     public User savecustomeruser(User user,AuthenticationProvider authProvider){
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(true);
+        user.setAuthenticationProvider(AuthenticationProvider.LOCAL);
         user.setAuthenticationProvider(authProvider);
         if (findByRole("CUSTOMER") == null) {
             Role createRole = new Role();

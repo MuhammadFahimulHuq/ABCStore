@@ -23,7 +23,7 @@ public class PaymentMethodController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/paymentmethod",method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/paymentmethod",method = RequestMethod.GET)
     public ModelAndView getPayment(Authentication authentication){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("paymentMethod",new PaymentMethod());
@@ -32,7 +32,7 @@ public class PaymentMethodController {
         modelAndView.setViewName("paymentMethod");
         return modelAndView;
     }
-    @RequestMapping(value = "/paymentmethod",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/paymentmethod",method = RequestMethod.POST)
     public ModelAndView setPayment(@Valid PaymentMethod paymentMethod, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
         PaymentMethod existPaymentMethod = paymentMethodService.getPaymentMethodByMethodId(paymentMethod.getMethodType());
@@ -50,7 +50,7 @@ public class PaymentMethodController {
         }
         return modelAndView;
         }
-    @RequestMapping(value ="/paymentmethod/update/{id}",method = RequestMethod.GET)
+    @RequestMapping(value ="/admin/paymentmethod/update/{id}",method = RequestMethod.GET)
     public ModelAndView updatePaymentMethod(@PathVariable("id") Integer id){
         ModelAndView modelAndView = new ModelAndView();
         PaymentMethod paymentMethod = paymentMethodService.getPaymentMethodByID(id);
@@ -61,14 +61,14 @@ public class PaymentMethodController {
     }
 
 
-    @RequestMapping(value = "/paymentmethod/update/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/paymentmethod/update/{id}",method = RequestMethod.POST)
     public ModelAndView updatePaymentMethod(@PathVariable("id")Integer id,@Valid PaymentMethod paymentMethod){
         ModelAndView modelAndView = new ModelAndView();
         paymentMethodService.updatePaymentMethod(id,paymentMethod);
         modelAndView.setViewName("redirect:/paymentmethod");
         return modelAndView;
     }
-    @RequestMapping(value ="/paymentmethod/delete/{id}")
+    @RequestMapping(value ="/admin/paymentmethod/delete/{id}")
     public ModelAndView deletePaymentMethod(@PathVariable("id") Integer id){
         ModelAndView modelAndView = new ModelAndView();
         paymentMethodService.deletePaymentMethod(id);

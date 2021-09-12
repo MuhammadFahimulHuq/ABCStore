@@ -91,6 +91,15 @@ public class PurchaseReceiptController {
         }
         return modelAndView;
     }
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
+    public ModelAndView getAllOrder(Authentication authentication){
+       ModelAndView modelAndView = new ModelAndView();
+       modelAndView.addObject("user",userService.findUserByEmail(authentication.getName()));
+       modelAndView.addObject("orders",purchaseReceiptService.getAllPurchaseReceipt());
+       modelAndView.setViewName("order");
+       return modelAndView;
+
+    }
 
 
 }
