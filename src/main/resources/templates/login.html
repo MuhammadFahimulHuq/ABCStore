@@ -15,7 +15,7 @@
     <link rel="icon" href="../icons/abcIcon.png">
     <!--    default css-->
     <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
-<!--    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/pageSetup.css}"/>
     <link rel="stylesheet" th:href="@{/css/navbarOne.css}"/>
     <link rel="stylesheet" th:href="@{/css/footer.css}"/>
 
@@ -25,14 +25,15 @@
 <!--<div th:include="fragments/navbar/navbar_main :: navbar_main ">...</div>-->
 
 <div th:include="fragments/navbar/Navbar :: navbar">...</div>
-<div class="container" style="padding:5% 0%;">
+<div class="container loginContainer" style="padding:5% 0%;">
     <div class="row">
+
         <div class="col">
-            <img th:src="@{icons/loginImage.png}">
+            <img id="loginImage" th:src="@{icons/loginImage.png}">
         </div>
         <div class="col">
             <h2>Sign in</h2>
-            <form th:action="@{/login}" method="POST">
+            <form th:action="@{/login}" method="POST" autocomplete="off">
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email Address</label>
@@ -47,13 +48,13 @@
                 <button type="submit" class="btn btn-outline-success" style="margin:3px;">Submit</button>
                 <div  class="form-text">Don't have an account? <a href="/registration" style="color:#EF980C">Register</a></div>
             </form>
-            <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
-            <div class="form-group col-lg-12 mx-auto">
-                <a th:href="@{/oauth2/authorization/facebook}" class="btn btn-primary btn-block py-2 btn-facebook">
-                    <i class="fa fa-facebook-f mr-2"></i>
-                    <span class="font-weight-bold">Continue with Facebook</span>
-                </a>
-            </div>
+<!--            <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>-->
+<!--            <div class="form-group col-lg-12 mx-auto">-->
+<!--&lt;!&ndash;                <a th:href="@{/oauth2/authorization/facebook}" class="btn btn-primary btn-block py-2 btn-facebook">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <i class="fa fa-facebook-f mr-2"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span class="font-weight-bold">Continue with Facebook</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--            </div>-->
         </div>
     </div>
     </div>

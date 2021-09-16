@@ -27,7 +27,7 @@
         <div class="container">
             <div class="content">
                 <div class="row">
-                    <div class="col-md-12 col-lg-8">
+                    <div class="col-md-12 col-lg-7">
                         <div class="items">
                             <div class="product"  th:each="cart :${cartList}">
                                 <div class="row">
@@ -51,7 +51,7 @@
                                                         <a class="product-link-name" th:href="'/view/'+${cart.product.id}" th:text="${cart.product.productSpec.brand}+' : '+${cart.product.productName}"></a>
                                                         <div class="product-info">
                                                             <div>Weight: <span class="value" th:text="${cart.product.productSpec.weight}"></span></div>
-                                                            <div>Description: <span class="value" th:text="${cart.product.productSpec.description}"></span></div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -82,14 +82,14 @@
                                                                     <div  style="display:flex; margin-left:40px;">
                                                                         <img class="tkIcon" src="../icons/tkIcon.png"  ><p class="card-text " th:text="${cart.product.productPrice.price}"></p>
                                                                     </div>
-                                                                     <div style="display:flex"><p th:text="${cart.quantity}+'X'+${cart.product.productPrice.price}+'='"></p><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
+
                                                                 </span>
                                                                 <span th:case="*">
                                                                     <div style="display:flex">
                                                                         <div  style="display:flex"><img class="tkIcon" src="../icons/tkIcon.png"  ><p class="card-text priceText" id="priceNum" th:text="${cart.product.productPrice.price}"></p></div>
                                                                         <div  style="display:flex; margin-left:15px;"><img   class="tkIcon" src="../icons/tkIcon.png"  > <p class="card-text dPriceText" id="discountPriceNum"  th:text="${cart.product.productPrice.discountPrice}"></p></div>
                                                                     </div>
-                                                                        <div style="display:flex"><p th:text="${cart.quantity}+'X'+${cart.product.productPrice.discountPrice}+'='"></p><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
+
                                                                 </span>
                                                             </span>
                                                 </div>
@@ -105,27 +105,32 @@
 
 
 
-                    <div class="col-md-12 col-lg-4">
+                    <div class=" col-md-12 col-lg-5">
                         <div class="summary">
                             <h3>Summary</h3>
-                            <div class="summary-item" th:each="cart :${cartList}"> <span class="text" th:text="${cart.product.productName}"></span>
-                            <span class="price" id="subTotalAmount">
-                                           <span th:switch="${cart.product.productPrice.discountPrice}">
-                                               <span th:case="'0.0'">
-                                                   <div style="display:flex"><p th:text="${cart.quantity}+'X'+${cart.product.productPrice.price}+'='"></p><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
-                                               </span>
-                                               <span th:case="*">
-                                                   <div style="display:flex"><p th:text="${cart.quantity}+'X'+${cart.product.productPrice.discountPrice}+'='"></p><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
-                                               </span>
-                                           </span>
 
+                        <div class="summary-item"  th:each="cart :${cartList}"><span class="text" th:text="${cart.product.productSpec.brand}+' : '+${cart.product.productName}"></span>
+                        <span class="price" >
+                                     <span th:switch="${cart.product.productPrice.discountPrice}">
+                                                                <span th:case="'0.0'">
+                                                                     <div style="display:flex"><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
+                                                                </span>
+                                                                <span th:case="*">
 
-                            </span></div>
-
-                            <div class="summary-item"><span class="text" >Total</span><span class="price" id="totalAmount"> </span></div>
-                            <a th:href="@{'/purchasereceipt/'+${userId}}" type="button" class="btn btn-success btn-lg btn-block">Checkout</a>
+                                                                        <div style="display:flex"><img   class="tkIcon" src="../icons/tkIcon.png"  > <p  class="productSubTotal" th:id="'subTotal'+${cart.product.id}" style="color:green" th:text="${cart.getSubTotal()}"> </p></div>
+                                                                </span>
+                                                            </span>
+                        </span>
                         </div>
+
+                            <div class="summary-item"><span class="text" >Total</span><span class="price" style="display:flex"><img class="tkIcon" src="../icons/tkIcon.png" ><strong style="color:#018520;" id="totalAmount"></strong> </span></div>
+
+                        <a th:href="@{'/purchasereceipt/'+${userId}}" type="button" class="btn btn-success btn-lg btn-block" style="margin:25px 0px 0px 0px;">Checkout</a>
+
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </div>

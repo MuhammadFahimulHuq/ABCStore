@@ -39,12 +39,14 @@ function updateQuantity(productId,quantity){
        }).done(function(newSubTotal){
         updateSubTotal(newSubTotal,productId);
         updateTotal();
+
        }).fail(function(){
         $("#modal").text("Error");
        })
 }
 function updateSubTotal(newSubTotal,productId){
 $("#subTotal"+productId).text(newSubTotal);
+
 }
 
 function updateTotal(){

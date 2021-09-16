@@ -2,6 +2,7 @@ $(document).ready(function(){
 updateTotal();
 updateTotalWithShipment();
 $("#totalWithShipmentCost").text('*Choose From Below')
+
 })
 
 

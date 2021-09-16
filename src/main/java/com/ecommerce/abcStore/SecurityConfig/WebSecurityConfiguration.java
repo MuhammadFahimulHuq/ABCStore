@@ -49,11 +49,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
-                authorizeRequests()
+        http.cors().disable()
+                .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/oauth2/**").permitAll()
                 .antMatchers("/category/**").permitAll()
+                .antMatchers("/cart/**").permitAll()
                 .antMatchers("/view/**").permitAll()
                 .antMatchers("/icons/**").permitAll()
                 .antMatchers("/jquery/**").permitAll()

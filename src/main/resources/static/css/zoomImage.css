@@ -1,4 +1,10 @@
+@media screen and (max-width: 700px)  {
+#featured{width:400px;
+height:500px;
+margin-left:40px;
+}
 
+}
 
 #content-wrapper{
 	display: flex;

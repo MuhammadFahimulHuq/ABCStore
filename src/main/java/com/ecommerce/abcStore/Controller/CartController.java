@@ -6,6 +6,7 @@ import com.ecommerce.abcStore.Model.User;
 import com.ecommerce.abcStore.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,10 @@ public class CartController {
 @RequestMapping(value = "/cart",method = RequestMethod.GET)
 public ModelAndView getCart(Authentication authentication){
     ModelAndView modelAndView = new ModelAndView();
+    if(authentication == null){
+        modelAndView.setViewName("redirect:/login");
+        return modelAndView;
+    }
     modelAndView.addObject("user",userService.findUserByEmail(authentication.getName()));
     modelAndView.addObject("categoryList",categoryService.getAllCategory());
         modelAndView.addObject("cartList",cartService.getCartByUserId(userService.findUserByEmail(authentication.getName()).getId()));
@@ -43,7 +48,7 @@ public ModelAndView getCart(Authentication authentication){
     return modelAndView;
 }
 @RequestMapping(value = "/cart/{id}",method = RequestMethod.GET)
-    public ModelAndView createCart(HttpSession session, @PathVariable("id") Integer productId, Principal principle){
+    public ModelAndView createCart(HttpSession session, @PathVariable("id") Integer productId,Principal principle){
     ModelAndView modelAndView = new ModelAndView();
     if(principle == null ){
         modelAndView.addObject("error","You must login to add this product to your shopping cart.");

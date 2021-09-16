@@ -10,7 +10,7 @@
         <section class="payment-form ">
             <div class="container">
 
-                <form th:action="@{'/purchasereceipt/'+${userId}}"  th:object="${purchaseReceipt}"  th:method="POST">
+                <form id="form"  th:action="@{'/purchasereceipt/'+${userId}}"  th:object="${purchaseReceipt}" th:method="POST">
                     <div class="products" >
                         <h3 class="title">Review checkout</h3>
                         <div class="item" th:each="cart:${cartList}">
@@ -49,10 +49,6 @@
 
                             </div>
                             <strong style="margin-top:7px;">*Enter Address</strong>
-
-
-
-
 
                             <div class="form-group col-sm-6">
                                 <label>Enter City</label>
@@ -99,7 +95,7 @@
                                        class="validation-message" ></small>
 
                             </div>
-                      <button type="submit" class="btn btn-success btn-block">Proceed</button>
+                          <button type="submit" class="btn btn-success btn-block" >Proceed</button>
 
 
 

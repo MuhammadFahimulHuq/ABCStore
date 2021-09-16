@@ -45,22 +45,26 @@
 
         <div class="col" style="display:flex;">
             <div th:object="${product.productSpec}">
+                <label >Enter Brand Name:</label>
                 <input class="form-control" type="text" placeholder="Brand" th:field="*{brand}" style="margin:3px;">
 
                 <div th:object="${product}">
+                    <label >Enter Product Name:</label>
                     <input class="form-control" type="text" placeholder="Product Name" th:field="*{productName}" style="margin:3px;">
                     <label  th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></label>
                 </div>
-
+                <label>Enter Weight:</label>
                 <input class="form-control" type="text" placeholder="Weight"  th:field="*{weight}" style="margin:3px;">
-                <label for="gender">Gender</label>
+                <label>Enter Gender:</label>
                 <select id="gender" th:field="*{gender}" style="margin:3px;">
                     <option th:value="Male">Male</option>
                     <option th:value="Female">Female</option>
                     <option th:value="Unisex">Unisex</option>
-                <input  class="form-control" style="margin:3px;" type="text" placeholder="Made In From" th:field="*{madeIn}">
-                <textarea class="form-control" style="margin:3px;" rows="3"  placeholder="Description" th:field="*{description}"></textarea>
                 </select>
+                    <label >Enter Made In From:</label>
+                <input  class="form-control" style="margin:3px;" type="text" placeholder="Made In From" th:field="*{madeIn}">
+                    <label >Enter Description:</label>
+                <textarea class="form-control" style="margin:3px;" rows="3"  placeholder="Description" th:field="*{description}"></textarea>
             </div>
 
         </div>

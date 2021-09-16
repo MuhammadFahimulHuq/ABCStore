@@ -25,7 +25,7 @@
 
 <div class="container" style="padding:5% 0%">
     <div th:include="fragments/admin/admin_dashboard :: adminDashboard ">...</div>
-    <h4 th:text="'Create Stock : '+${product.productSpec.brand}+':'+${product.productName}"> </h4>
+    <h4 th:text="'Create Stock : '"> </h4>
     <form th:action="@{'/stock/'+${id}}" th:object="${products}" method="POST">
         <div th:object="${stock}">
             <div class="row">

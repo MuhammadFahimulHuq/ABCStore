@@ -50,11 +50,13 @@
                             <span class="fa fa-star checkedStar"></span>
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
-
                             </div>
+                            <script type="text/javascript" th:inline="javascript">
+                                var productID="[[${product.id}]]";
+                            </script>
                             <p style="font-size:15px; font-weight: bold; margin-left:18px;" th:text="'Weight : ' + ${product.productSpec.weight}"></p>
-                            <a style="margin-left:15px;" type="button" th:href="@{'/cart/'+${product.id}}" class="btn btn-success">Add To Cart</a>
-
+                            <a style="margin-left:15px;" type="button" th:id="${product.id}"  class="btn btn-success homeAddToCart" >Add To Cart</a>
+                            <div ></div>
                         </div>
                     </div>
                 </div>

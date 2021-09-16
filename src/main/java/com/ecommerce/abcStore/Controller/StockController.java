@@ -26,7 +26,7 @@ public class StockController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/admin/stock/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/stock/{id}",method = RequestMethod.GET)
     public ModelAndView getProductStock(@PathVariable Long id, Authentication authentication){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("stock",new Stock());
@@ -36,7 +36,7 @@ public class StockController {
         modelAndView.setViewName("stock");
         return modelAndView;
     }
-    @RequestMapping(value = "/admin/stock/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/stock/{id}",method = RequestMethod.POST)
     public ModelAndView setProductStock(@PathVariable("id") Long id, @Valid Stock stock, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
 
@@ -52,7 +52,7 @@ public class StockController {
         }
         return modelAndView;
     }
-    @RequestMapping(value = "/admin/product/stock/update/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/product/stock/update/{id}",method = RequestMethod.GET)
     public ModelAndView updateProductStock(@PathVariable("id") Long id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("stock",new Stock());
@@ -61,7 +61,7 @@ public class StockController {
         modelAndView.setViewName("stock_update");
         return modelAndView;
     }
-    @RequestMapping(value = "/admin/product/stock/update/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/product/stock/update/{id}",method = RequestMethod.POST)
     public ModelAndView updateProductStock(@PathVariable("id") Long id,@Valid Stock stock,BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
@@ -74,11 +74,10 @@ public class StockController {
         }
         return modelAndView;
     }
-    @RequestMapping(value = "/admin/product/stock/delete/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/product/stock/delete/{id}",method = RequestMethod.GET)
     public ModelAndView deleteProductStock(@PathVariable("id") Long id){
         ModelAndView modelAndView = new ModelAndView();;
-        Stock stock = stockService.getStockById(id);
-        stockService.deleteStock(stock.getId());
+        stockService.deleteStock(id);
         modelAndView.addObject("successDeleteMessage","Stock Successfully Deleted");
         modelAndView.setViewName("redirect:/stock/{id}");
         return modelAndView;

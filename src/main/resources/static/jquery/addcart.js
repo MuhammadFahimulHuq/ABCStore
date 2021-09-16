@@ -1,9 +1,11 @@
 $( document ).ready(function() {
-        $("#modal-success").hide();
-        $("#modal-failure").hide();
         $("#addTocart").on("click",function(e){
          addQuantity();
         });
+
+   $(".homeAddToCart").on("click",function(e){
+   addDefaultQuantity($(this));
+   })
 });
 
 
@@ -20,10 +22,28 @@ function addQuantity(){
        xhr.setRequestHeader(header,token);
        }
        }).done(function(response){
-       $("#modal-success").text(response).show();
+      $.notify(response, "success");
        }).fail(function(){
-       $("#modal-failure").text(response).show();
+   	  $.notify(response, "error");
        })
 }
+function addDefaultQuantity(link){
+       var token = $("meta[name='_csrf']").attr("content");
+       var header = $("meta[name='_csrf_header']").attr("content");
 
+       productId= link.attr("id");
+       url=  "/cart/"+productId+"/"+1;
+       $.ajax({
+       type: "POST",
+       url: url,
+       beforeSend: function(xhr){
+       xhr.setRequestHeader(header,token);
+       }
+       }).done(function(response){
+       $.notify(response, "success");
+       }).fail(function(response){
+   	  $.notify("Error while adding product to shopping cart.", "error");
+       })
+
+}
 

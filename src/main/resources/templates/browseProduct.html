@@ -30,7 +30,6 @@
     <link rel="stylesheet" th:href="@{/css/comment.css}"/>
     <link rel="stylesheet" th:href="@{/css/footer.css}"/>
 
-
 </head>
 <body>
 <!--<div th:include="fragments/navbar/navbar_main :: navbar_main ">...</div>-->
@@ -41,7 +40,7 @@
 
 
         <div class="container" style="padding:5% 0%;">
-            <div th:include="fragments/modal/modals:: modals">...</div>
+
             <div th:include="fragments/admin/admin_dashboard :: adminDashboard ">...</div>
             <div th:include="fragments/card/productCard :: productCard"></div>
 <!--            <div th:include="fragments/commentSection/comment :: commentSection">...</div>-->
@@ -49,11 +48,14 @@
 </div>
 <div th:include="fragments/footer/footer :: footer ">...</div>
 <script src="/jquery/jquery-3.6.0.min.js"></script>
+<script src="/jquery/notify.js"></script>
+<script src="/jquery/notify.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/xzoom.min.js"></script>
 <script type="text/javascript" src="../jquery/addcart.js"></script>
 <script type="text/javascript" src="../jquery/quantityControl.js"></script>
 <script type="text/javascript" src="../jquery/navbar.js"></script>
 <script type="text/javascript" src="../jquery/zoomImage.js"></script>
 <script type="text/javascript" src="../jquery/rating.js"></script>
+
 </body>
 </html>
