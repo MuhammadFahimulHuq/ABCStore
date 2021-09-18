@@ -67,9 +67,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/",true)
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .and()
-                .oauth2Login().loginPage("/login").userInfoEndpoint().userService(oAuth2UserService)
-                .and().successHandler(oAuth2LoginSuccessHandler)
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").and().exceptionHandling()
@@ -89,6 +86,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomOAuth2UserService oAuth2UserService;
-    @Autowired
-    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+
 }
